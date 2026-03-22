@@ -1,0 +1,29 @@
+.section {
+  padding: 90px 0;
+}
+.inner {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+.content {
+  flex: 1;
+}
+.content h2 {
+  margin-bottom: 24px;
+}
+.content p {
+  color: var(--text-opaque);
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+.cta {
+  margin-top: 32px;
+}
+@media (max-width: 1023px) {
+  .section { padding: 60px 0; }
+  .inner { flex-direction: column; gap: 30px; }
+}
+@media (max-width: 767px) {
+  .section { padding: 40px 0; }
+}
