@@ -36,7 +36,7 @@ export default function Testimonials() {
   return (
     <section className={styles.section}>
       <div className="container">
-        <h2 className={styles.heading}>What clients think about us</h2>
+        <p className={styles.headline}>Testimonials</p>
         <div className={styles.grid}>
           {testimonials.map((t) => (
             <div key={t.name} className={styles.card}>

@@ -9,6 +9,7 @@ interface SubService {
   imageDark?: string;
   imageLight?: string;
   image?: string;
+  href?: string;
 }
 
 interface ServiceSectionProps {
@@ -28,34 +29,42 @@ export default function ServiceSection({
     <section className={alt ? styles.sectionAlt : styles.section}>
       <div className="container">
         <div className={styles.sectionHeader}>
-          <span className={styles.sectionNumber}>{number}</span>
-          <div>
-            <h2 className={styles.sectionTitle}>{title}</h2>
-            <p className={styles.sectionDesc}>{description}</p>
+          <p className={styles.sectionLabel}>{number} {title}</p>
+          <div className={styles.headerRow}>
+            <div className={styles.headerLeft}>
+              <div className={styles.sectionTitle}>{description}</div>
+            </div>
+            <div className={styles.headerRight}>
+              <div className={styles.cta}>
+                <Link href={ctaLink} className="btn btn--primary">View More</Link>
+              </div>
+            </div>
           </div>
         </div>
-        <div className={styles.grid}>
+
+        <div className={styles.servicesGrid}>
           {services.map((s) => {
             const imgSrc = s.imageDark && s.imageLight
               ? (theme === 'dark' ? s.imageDark : s.imageLight)
               : s.image || s.imageDark || '';
             return (
-              <div key={s.title} className={styles.card}>
+              <div key={s.title} className={styles.serviceItem}>
                 {imgSrc && (
-                  <div className={styles.cardImage}>
-                    <Image src={imgSrc} alt={s.title} fill style={{ objectFit: 'cover' }} />
+                  <div className={styles.serviceImage}>
+                    <Image
+                      src={imgSrc}
+                      alt={s.title}
+                      width={670}
+                      height={732}
+                      style={{ objectFit: 'cover' }}
+                    />
                   </div>
                 )}
-                <div className={styles.cardBody}>
-                  <h5>{s.title}</h5>
-                  <p>{s.description}</p>
-                </div>
+                <h3>{s.title}</h3>
+                <p>{s.description}</p>
               </div>
             );
           })}
-        </div>
-        <div className={styles.cta}>
-          <Link href={ctaLink} className="btn btn--secondary">View More</Link>
         </div>
       </div>
     </section>

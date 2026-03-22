@@ -30,82 +30,74 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 .navLink {
   color: var(--text);
   font-weight: 500;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   text-decoration: none;
   transition: color 0.2s;
-  position: relative;
 }
 .navLink:hover {
   color: var(--primary);
 }
-.navLink::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary);
-  transition: width 0.5s;
-}
-.navLink:hover::after {
-  width: 100%;
-}
 .actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 .themeToggle {
   background: none;
   border: 1px solid var(--text-transparent);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: var(--text);
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   transition: all 0.3s;
 }
 .themeToggle:hover {
   border-color: var(--primary);
   color: var(--primary);
 }
+.ctaBtn {
+  padding: 10px 24px;
+  font-size: 0.875rem;
+  border-radius: 30px;
+}
 .hamburger {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 5px;
 }
 .hamburger span {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 2px;
   background: var(--text);
   transition: all 0.3s;
+  border-radius: 1px;
 }
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
+.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
 }
-.hamburger.active span:nth-child(2) {
+.active span:nth-child(2) {
   opacity: 0;
 }
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 .mobileMenu {
   display: none;
@@ -121,7 +113,7 @@
   gap: 24px;
   overflow-y: auto;
 }
-.mobileMenu.open {
+.open {
   display: flex;
 }
 .mobileMenu .navLink {
@@ -131,7 +123,7 @@
 
 @media (max-width: 1023px) {
   .nav { display: none; }
-  .actions .ctaBtn { display: none; }
+  .ctaBtn { display: none; }
   .hamburger { display: flex; }
 }
 @media (max-width: 767px) {

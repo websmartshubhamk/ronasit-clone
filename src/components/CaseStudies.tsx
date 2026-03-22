@@ -37,12 +37,22 @@ export default function CaseStudies({ theme }: { theme: string }) {
   return (
     <section className={styles.section}>
       <div className="container">
-        <h2 className={styles.heading}>Explore Our Success Stories</h2>
-        <p className={styles.subheading}>
-          As a software development company, we are not only releasing successful projects
-          but also constantly sharing our experience.
-        </p>
-        <div className={styles.carousel}>
+        <p className="headline">Explore Our Success Stories</p>
+        <div className={styles.headerRow}>
+          <div className={styles.headerLeft}>
+            <div className={styles.title}>
+              Explore Our Success Stories and Expertise in Software Development
+            </div>
+          </div>
+          <div className={styles.headerRight}>
+            <p className={styles.subtitle}>
+              As a software development company, we are not only releasing successful
+              projects but also constantly sharing our experience.
+            </p>
+          </div>
+        </div>
+
+        <div className={styles.grid}>
           {cases.map((c) => (
             <a
               key={c.title}
@@ -55,15 +65,14 @@ export default function CaseStudies({ theme }: { theme: string }) {
                 <Image
                   src={theme === 'dark' ? c.dark : c.light}
                   alt={c.title}
-                  fill
+                  width={670}
+                  height={420}
                   style={{ objectFit: 'cover' }}
                 />
               </div>
-              <div className={styles.cardBody}>
-                <h5>{c.title}</h5>
-                <p>{c.description}</p>
-                <span className={styles.viewMore}>View More</span>
-              </div>
+              <div className={styles.cardTitle}>{c.title}</div>
+              <p className={styles.cardDesc}>{c.description}</p>
+              <span className={styles.viewMore}>View More</span>
             </a>
           ))}
         </div>

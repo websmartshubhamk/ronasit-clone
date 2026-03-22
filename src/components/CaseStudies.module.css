@@ -1,72 +1,108 @@
 .section {
   padding: 90px 0;
+  background: var(--background-second);
 }
-.heading {
-  margin-bottom: 16px;
-  max-width: 800px;
+.headerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 3rem;
 }
-.subheading {
+.headerLeft {
+  width: 65%;
+  padding-right: 40px;
+}
+.headerRight {
+  width: 35%;
+}
+.title {
+  font-size: 2.85rem;
+  font-weight: 500;
+  line-height: 3.71rem;
+}
+.subtitle {
   color: var(--text-opaque);
-  margin-bottom: 48px;
-  max-width: 700px;
-  line-height: 1.8;
+  font-size: 1.14rem;
+  line-height: 1.7rem;
 }
-.carousel {
+
+.grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 30px;
 }
+
 .card {
-  background: var(--background-card-third);
-  border-radius: 24px;
-  overflow: hidden;
-  transition: all 0.5s;
   text-decoration: none;
   color: var(--text);
   display: block;
+  transition: all 0.5s;
 }
 .card:hover {
-  transform: translateY(-4px);
   color: var(--text);
 }
+
 .cardImage {
   position: relative;
   width: 100%;
-  height: 280px;
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  overflow: hidden;
   background: var(--background-case-image);
+  margin-bottom: 1.25rem;
 }
 .cardImage img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.5s;
 }
-.cardBody {
-  padding: 28px 32px;
+.card:hover .cardImage img {
+  transform: scale(1.03);
 }
-.cardBody h5 {
-  margin-bottom: 8px;
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
 }
-.cardBody p {
+.card:hover .cardTitle {
+  color: var(--primary);
+}
+
+.cardDesc {
   color: var(--text-opaque);
   font-size: 0.9375rem;
   line-height: 1.6;
+  margin-bottom: 0.75rem;
 }
+
 .viewMore {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   color: var(--primary);
-  font-weight: 600;
-  margin-top: 12px;
+  font-weight: 500;
   font-size: 0.9375rem;
+  transition: gap 0.3s;
 }
 .viewMore::after {
   content: '→';
+  transition: transform 0.3s;
 }
+.card:hover .viewMore::after {
+  transform: translateX(4px);
+}
+
 @media (max-width: 1023px) {
   .section { padding: 60px 0; }
-  .carousel { grid-template-columns: 1fr; }
+  .headerLeft, .headerRight { width: 100%; padding-right: 0; }
+  .headerRight { margin-top: 1.5rem; }
+  .grid { grid-template-columns: 1fr; }
+  .title { font-size: 2.28rem; line-height: 3rem; }
 }
 @media (max-width: 767px) {
   .section { padding: 40px 0; }
-  .cardImage { height: 200px; }
-  .cardBody { padding: 20px 24px; }
+  .title { font-size: 1.8rem; line-height: 2.4rem; }
 }

@@ -34,7 +34,7 @@ export default function Header({ theme, toggleTheme }: HeaderProps) {
             onClick={toggleTheme}
             aria-label="Toggle theme"
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {theme === 'dark' ? '☀' : '☾'}
           </button>
           <Link href="/contact" className={`btn btn--primary ${styles.ctaBtn}`}>
             Estimate Project

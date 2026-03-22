@@ -1,66 +1,76 @@
 .section {
   padding: 90px 0;
+  background: var(--background-second);
 }
 .topStats {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 80px;
   margin-bottom: 60px;
   flex-wrap: wrap;
 }
 .stat {
-  text-align: center;
+  text-align: left;
 }
 .statNumber {
   font-size: 3.75rem;
   font-weight: 800;
-  color: var(--primary);
+  color: var(--text);
   line-height: 1;
+  margin-bottom: 8px;
 }
 .statLabel {
   color: var(--text-opaque);
-  font-size: 0.9375rem;
-  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.divider {
+  height: 1px;
+  background: var(--text-transparent);
+  margin: 48px 0;
 }
 .platforms {
   display: flex;
-  justify-content: center;
-  gap: 40px;
+  justify-content: flex-start;
+  gap: 48px;
   flex-wrap: wrap;
-  margin-bottom: 48px;
+  align-items: flex-start;
 }
 .platform {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 .platformName {
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 .platformRating {
   color: var(--text-opaque);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.starSmall {
+  color: #f0b92c;
 }
 .badges {
   display: flex;
-  justify-content: center;
-  gap: 24px;
+  justify-content: flex-start;
+  gap: 20px;
   flex-wrap: wrap;
+  margin-top: 48px;
 }
 .badge {
   background: var(--background-card-third);
   border-radius: 16px;
-  padding: 16px 24px;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  padding: 14px 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
   color: var(--text-opaque);
-  transition: all 0.3s;
 }
-.badge:hover {
-  background: var(--background-card);
-}
+
 @media (max-width: 767px) {
   .section { padding: 40px 0; }
   .topStats { gap: 40px; }

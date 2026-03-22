@@ -5,74 +5,116 @@
   padding: 90px 0;
   background: var(--background-second);
 }
+
+/* Section header with number + heading + description */
 .sectionHeader {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-  margin-bottom: 48px;
+  margin-bottom: 3rem;
 }
-.sectionNumber {
-  font-size: 5.5rem;
-  font-weight: 800;
-  color: var(--primary);
-  opacity: 0.15;
-  line-height: 1;
-  flex-shrink: 0;
+.sectionLabel {
+  margin-bottom: 2.6875rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.headerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.headerLeft {
+  width: 65%;
+  padding-right: 40px;
+}
+.headerRight {
+  width: 35%;
 }
 .sectionTitle {
-  margin-bottom: 16px;
+  font-size: 2.85rem;
+  font-weight: 500;
+  line-height: 3.71rem;
 }
 .sectionDesc {
   color: var(--text-opaque);
-  max-width: 700px;
-  line-height: 1.8;
+  font-size: 1.14rem;
+  line-height: 1.7rem;
 }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+
+/* Service items - stacked vertically */
+.servicesList {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
 }
-.card {
-  background: var(--background-card);
-  border-radius: 24px;
-  overflow: hidden;
-  transition: all 0.5s;
+
+.serviceItem {
+  cursor: pointer;
 }
-.card:hover {
-  transform: translateY(-4px);
+
+.serviceItem a {
+  color: var(--text);
+  text-decoration: none;
 }
-.cardImage {
+
+.serviceImage {
   position: relative;
   width: 100%;
-  height: 240px;
+  aspect-ratio: 670 / 732;
+  border-radius: 20px;
   overflow: hidden;
   background: var(--background-image);
+  margin-bottom: 1.5rem;
 }
-.cardImage img {
+
+.serviceImage img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.5s;
 }
-.cardBody {
-  padding: 32px;
+
+.serviceItem:hover .serviceImage img {
+  transform: scale(1.03);
 }
-.cardBody h5 {
-  margin-bottom: 10px;
+
+.serviceItem h3 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s;
 }
-.cardBody p {
+
+.serviceItem:hover h3 {
+  color: var(--primary);
+}
+
+.serviceItem p {
   color: var(--text-opaque);
-  font-size: 0.9375rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 600px;
 }
+
+/* 2-column layout for service items */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
 .cta {
-  margin-top: 40px;
+  margin-top: 3rem;
 }
+
 @media (max-width: 1023px) {
   .section, .sectionAlt { padding: 60px 0; }
-  .grid { grid-template-columns: 1fr; }
-  .sectionNumber { font-size: 4rem; }
+  .headerLeft, .headerRight { width: 100%; padding-right: 0; }
+  .headerRight { margin-top: 1.5rem; }
+  .servicesGrid { grid-template-columns: 1fr; gap: 40px; }
+  .sectionTitle { font-size: 2.28rem; line-height: 3rem; }
 }
 @media (max-width: 767px) {
   .section, .sectionAlt { padding: 40px 0; }
-  .sectionNumber { font-size: 3rem; }
-  .cardImage { height: 180px; }
-  .cardBody { padding: 24px; }
+  .sectionTitle { font-size: 1.8rem; line-height: 2.4rem; }
+  .serviceItem h3 { font-size: 1.5rem; }
 }
