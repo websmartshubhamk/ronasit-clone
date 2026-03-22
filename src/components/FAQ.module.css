@@ -1,12 +1,24 @@
 .section {
   padding: 90px 0;
-  background: var(--background-second);
 }
-.heading {
-  margin-bottom: 48px;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.colLeft {
+  width: 35%;
+  padding-right: 40px;
+}
+.colRight {
+  width: 65%;
+}
+.title {
+  font-size: 2.85rem;
+  font-weight: 500;
+  line-height: 1.2;
 }
 .list {
-  max-width: 800px;
+  /* FAQ items */
 }
 .item {
   border-bottom: 1px solid var(--text-transparent);
@@ -73,11 +85,17 @@
   padding: 0 0 24px;
   color: var(--text-opaque);
   line-height: 1.8;
+  font-size: 1rem;
 }
+
 @media (max-width: 1023px) {
   .section { padding: 60px 0; }
+  .colLeft, .colRight { width: 100%; padding-right: 0; }
+  .colLeft { margin-bottom: 2rem; }
+  .title { font-size: 2.28rem; }
 }
 @media (max-width: 767px) {
   .section { padding: 40px 0; }
   .question { font-size: 1rem; padding: 20px 0; }
+  .title { font-size: 1.8rem; }
 }

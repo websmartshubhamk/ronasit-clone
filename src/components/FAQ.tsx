@@ -35,22 +35,29 @@ export default function FAQ() {
   return (
     <section className={styles.section}>
       <div className="container">
-        <h2 className={styles.heading}>FAQ</h2>
-        <div className={styles.list}>
-          {faqs.map((faq, i) => (
-            <div key={i} className={styles.item}>
-              <button
-                className={styles.question}
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              >
-                {faq.q}
-                <span className={`${styles.icon} ${openIndex === i ? styles.iconOpen : ''}`} />
-              </button>
-              <div className={`${styles.answer} ${openIndex === i ? styles.answerOpen : ''}`}>
-                <div className={styles.answerInner}>{faq.a}</div>
-              </div>
+        <p className="headline">FAQ</p>
+        <div className={styles.row}>
+          <div className={styles.colLeft}>
+            <h2 className={styles.title}>Frequently Asked Questions</h2>
+          </div>
+          <div className={styles.colRight}>
+            <div className={styles.list}>
+              {faqs.map((faq, i) => (
+                <div key={i} className={styles.item}>
+                  <button
+                    className={styles.question}
+                    onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                  >
+                    {faq.q}
+                    <span className={`${styles.icon} ${openIndex === i ? styles.iconOpen : ''}`} />
+                  </button>
+                  <div className={`${styles.answer} ${openIndex === i ? styles.answerOpen : ''}`}>
+                    <div className={styles.answerInner}>{faq.a}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
