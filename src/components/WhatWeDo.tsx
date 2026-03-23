@@ -3,7 +3,7 @@ import styles from './WhatWeDo.module.css';
 
 export default function WhatWeDo() {
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} fadeIn`}>
       <div className="container">
         <p className="headline">What We Do</p>
         <div className={styles.row}>
@@ -25,8 +25,8 @@ export default function WhatWeDo() {
             </p>
           </div>
         </div>
-        <div className={styles.button}>
-          <Link href="/services" className="btn btn--primary">View More</Link>
+        <div className={styles.buttonWrap}>
+          <Link href="/services" className="btn">View More</Link>
         </div>
       </div>
     </section>

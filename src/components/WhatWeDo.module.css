@@ -1,40 +1,46 @@
 .section {
-  padding: 90px 0;
+  padding: 4rem 0;
 }
+
 .row {
   display: flex;
   flex-wrap: wrap;
 }
+
 .colLeft {
   width: 65%;
   padding-right: 40px;
 }
+
 .colRight {
   width: 35%;
 }
+
 .title {
-  font-size: 2.85rem;
+  font-size: 2.5rem;
   font-weight: 500;
-  line-height: 3.71rem;
+  line-height: 3.25rem;
   color: var(--text);
 }
+
 .body {
   font-size: 1.14rem;
   line-height: 1.7rem;
   color: var(--text-opaque);
   margin-bottom: 1rem;
 }
-.button {
+
+.buttonWrap {
   margin-top: 2rem;
 }
 
 @media (max-width: 1023px) {
-  .section { padding: 60px 0; }
+  .section { padding: 3rem 0; }
   .colLeft, .colRight { width: 100%; padding-right: 0; }
   .colRight { margin-top: 2rem; }
-  .title { font-size: 2.28rem; line-height: 3rem; }
+  .title { font-size: 2rem; line-height: 2.6rem; }
 }
+
 @media (max-width: 767px) {
-  .section { padding: 40px 0; }
-  .title { font-size: 1.8rem; line-height: 2.4rem; }
+  .title { font-size: 1.6rem; line-height: 2.2rem; }
 }

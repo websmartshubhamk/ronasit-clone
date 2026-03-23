@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import WhatWeDo from '@/components/WhatWeDo';
@@ -77,20 +77,41 @@ const maintServices = [
 ];
 
 export default function Home() {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    const saved = localStorage.getItem('theme') || 'dark';
+    const saved = localStorage.getItem('theme') || 'light';
     setTheme(saved);
     document.documentElement.setAttribute('data-theme', saved);
   }, []);
 
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-    localStorage.setItem('theme', next);
-    document.documentElement.setAttribute('data-theme', next);
-  };
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      document.documentElement.setAttribute('data-theme', next);
+      return next;
+    });
+  }, []);
+
+  /* Fade-on-scroll observer */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    const fadeEls = document.querySelectorAll('.fadeIn');
+    fadeEls.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -113,7 +134,6 @@ export default function Home() {
           description="When working on a project, we not only establish scalable architecture design using best industry practices but also provide high-level data security."
           services={devServices}
           ctaLink="/services#development"
-          alt
           theme={theme}
         />
         <ServiceSection
@@ -126,7 +146,7 @@ export default function Home() {
         />
         <CaseStudies theme={theme} />
         <Testimonials />
-        <Stats />
+        <Stats theme={theme} />
         <FAQ />
       </main>
       <Footer />

@@ -1,32 +1,38 @@
 .section {
-  padding: 90px 0;
+  padding: 4rem 0;
   background: var(--background-second);
 }
+
+.sectionSubhead {
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 3rem;
+  color: var(--text);
+  max-width: 60%;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
 }
+
 .colLeft {
   width: 25%;
   padding-right: 30px;
 }
+
 .colRight {
   width: 75%;
 }
 
-.sectionTitle {
-  font-size: 1.7rem;
-  font-weight: 500;
-  line-height: 1.4;
-  margin-bottom: 2rem;
-}
-
-/* Tab navigation for testimonials */
+/* Tab navigation */
 .tabs {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
+
 .tab {
   background: none;
   border: none;
@@ -40,40 +46,47 @@
   cursor: pointer;
   transition: all 0.3s;
 }
+
 .tab:first-child {
   border-top: 1px solid var(--text-transparent);
 }
+
 .tabActive {
   color: var(--text);
 }
 
-/* Feedback item */
+/* Feedback */
 .feedbackItem {
-  margin-bottom: 2rem;
-}
-.feedbackItem:not(:last-child) {
-  padding-bottom: 3rem;
-  border-bottom: 1px solid var(--text-transparent);
+  /* single item displayed */
 }
 
 .rating {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 12px;
   margin-bottom: 2rem;
 }
+
+.ratingValue {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.ratingSep {
+  width: 1px;
+  height: 24px;
+  background: var(--text-transparent);
+}
+
 .stars {
   display: flex;
   gap: 2px;
 }
+
 .star {
   color: #f0b92c;
   font-size: 1rem;
-}
-.ratingValue {
-  font-weight: 600;
-  font-size: 0.9375rem;
-  margin-left: 4px;
 }
 
 .quoteText {
@@ -85,41 +98,62 @@
   display: block;
   transition: color 0.3s;
 }
+
 .quoteText:hover {
   color: var(--primary);
 }
 
 .authorMeta {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 12px;
 }
+
 .authorAvatar {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   overflow: hidden;
+  border: 1px solid var(--icon-border);
 }
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+}
+
 .authorName {
   font-weight: 600;
   font-size: 0.9375rem;
+  color: var(--text);
 }
+
 .authorRole {
   color: var(--text-opaque);
   font-size: 0.8125rem;
 }
 
 @media (max-width: 1023px) {
-  .section { padding: 60px 0; }
+  .section { padding: 3rem 0; }
+  .sectionSubhead { max-width: 100%; font-size: 1.4rem; }
   .colLeft, .colRight { width: 100%; padding-right: 0; }
   .colLeft { margin-bottom: 2rem; }
-  .tabs { flex-direction: row; gap: 0; overflow-x: auto; }
-  .tab { border-top: none; border-bottom: 2px solid var(--text-transparent); white-space: nowrap; padding: 12px 16px; }
+  .tabs {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .tab {
+    border-top: none;
+    border-bottom: 2px solid var(--text-transparent);
+    white-space: nowrap;
+    padding: 12px 16px;
+  }
   .tab:first-child { border-top: none; }
   .quoteText { font-size: 1.75rem; }
 }
+
 @media (max-width: 767px) {
-  .section { padding: 40px 0; }
   .quoteText { font-size: 1.3rem; }
+  .ratingValue { font-size: 1.25rem; }
 }

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './Stats.module.css';
 
 const platforms = [
@@ -14,11 +15,12 @@ const badges = [
   'Google Cloud Partner',
 ];
 
-export default function Stats() {
+export default function Stats({ theme }: { theme: string }) {
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} fadeIn`}>
       <div className="container">
         <p className="headline">Numbers</p>
+
         <div className={styles.topStats}>
           <div className={styles.stat}>
             <div className={styles.statNumber}>1870</div>
@@ -41,10 +43,31 @@ export default function Stats() {
             <div key={p.name} className={styles.platform}>
               <span className={styles.platformName}>{p.name}</span>
               <span className={styles.platformRating}>
-                <span className={styles.starSmall}>★</span> {p.rating} ({p.reviews} reviews)
+                <span className={styles.starSmall}>&#9733;</span> {p.rating} ({p.reviews} reviews)
               </span>
             </div>
           ))}
+        </div>
+
+        <div className={styles.divider} />
+
+        <div className={styles.badgesRow}>
+          <div className={styles.upworkBadge}>
+            <Image
+              src={theme === 'dark' ? '/img/upwork.svg' : '/img/upwork-light.svg'}
+              alt="Upwork"
+              width={80}
+              height={24}
+            />
+          </div>
+          <div className={styles.designBadge}>
+            <Image
+              src="/img/ui-design-agency.svg"
+              alt="UI Design Agency"
+              width={80}
+              height={24}
+            />
+          </div>
         </div>
 
         <div className={styles.badges}>

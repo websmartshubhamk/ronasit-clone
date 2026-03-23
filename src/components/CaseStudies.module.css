@@ -1,57 +1,48 @@
 .wrapper {
-  /* no padding - each project takes full width */
+  /* Projects section wrapper */
 }
 
 .header {
-  padding: 90px 0 60px;
+  padding: 4rem 0 2rem;
 }
 
-.headerRow {
-  display: flex;
-  flex-wrap: wrap;
+.headerContent {
+  max-width: 80%;
 }
-.headerCol {
-  width: 80%;
-}
-.headerCol h2 {
-  font-size: 2.85rem;
+
+.headerTitle {
+  font-size: 2.5rem;
   font-weight: 500;
   line-height: 1.3;
   margin-bottom: 1.25rem;
+  color: var(--text);
 }
-.headerCol p {
+
+.headerDesc {
   color: var(--text-opaque);
   font-size: 1.14rem;
   line-height: 1.7rem;
 }
 
-/* Each project is a full-width section */
+/* Each project: ~80vh min-height */
 .project {
+  min-height: 80vh;
+  padding: 4rem 0;
   position: relative;
-  overflow: hidden;
-}
-
-.projectDetails {
-  padding: 80px 0;
 }
 
 .projectRow {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  min-height: 60vh;
 }
 
+/* Text side: col_50 */
 .projectText {
   width: 50%;
   padding-right: 40px;
-}
-
-.projectLabel {
-  margin-bottom: 2.6875rem;
-  font-size: 1.125rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--text-opaque);
+  padding-top: 2rem;
 }
 
 .projectTitle {
@@ -59,6 +50,7 @@
   font-weight: 500;
   line-height: 1.4;
   margin-bottom: 1.5rem;
+  color: var(--text);
 }
 
 .projectTags {
@@ -76,20 +68,25 @@
   padding: 4px 14px;
 }
 
-/* Full-width image below on mobile, right on desktop */
+/* Image side: sticky, fills right half */
+.projectImageWrap {
+  width: calc(50% - 160px);
+  position: sticky;
+  top: 180px;
+  height: calc(100vh - 260px);
+  margin-left: auto;
+}
+
 .projectImage {
-  width: 50%;
   position: relative;
-  aspect-ratio: 16 / 10;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
   overflow: hidden;
   background: var(--background-case-image);
 }
 
 .projectImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   transition: transform 0.6s;
 }
 
@@ -97,21 +94,42 @@
   transform: scale(1.02);
 }
 
-/* Alternate backgrounds */
-.projectEven {
-  background: var(--background-second);
+@media (max-width: 1023px) {
+  .header { padding: 3rem 0 1rem; }
+  .headerContent { max-width: 100%; }
+  .headerTitle { font-size: 2rem; }
+
+  .project { min-height: auto; padding: 3rem 0; }
+  .projectRow { min-height: auto; }
+  .projectText { width: 100%; padding-right: 0; order: 2; }
+
+  .projectImageWrap {
+    width: 100%;
+    position: static;
+    height: auto;
+    padding-top: 100%;
+    margin-bottom: 2rem;
+    order: 1;
+  }
+
+  .projectImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .projectRow {
+    position: relative;
+  }
 }
 
-@media (max-width: 1023px) {
-  .header { padding: 60px 0 40px; }
-  .headerCol { width: 100%; }
-  .headerCol h2 { font-size: 2.28rem; }
-  .projectText, .projectImage { width: 100%; padding-right: 0; }
-  .projectImage { margin-top: 2rem; }
-  .projectDetails { padding: 60px 0; }
-}
 @media (max-width: 767px) {
-  .header { padding: 40px 0 20px; }
-  .headerCol h2 { font-size: 1.8rem; }
-  .projectDetails { padding: 40px 0; }
+  .headerTitle { font-size: 1.6rem; }
+  .projectTitle { font-size: 1.5rem; }
+
+  .projectImageWrap {
+    padding-top: 155.5%;
+  }
 }

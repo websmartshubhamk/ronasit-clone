@@ -33,7 +33,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} fadeIn`}>
       <div className="container">
         <p className="headline">FAQ</p>
         <div className={styles.row}>
@@ -45,13 +45,18 @@ export default function FAQ() {
               {faqs.map((faq, i) => (
                 <div key={i} className={styles.item}>
                   <button
+                    type="button"
                     className={styles.question}
                     onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                    aria-expanded={openIndex === i}
                   >
-                    {faq.q}
+                    <span>{faq.q}</span>
                     <span className={`${styles.icon} ${openIndex === i ? styles.iconOpen : ''}`} />
                   </button>
-                  <div className={`${styles.answer} ${openIndex === i ? styles.answerOpen : ''}`}>
+                  <div
+                    className={`${styles.answer} ${openIndex === i ? styles.answerOpen : ''}`}
+                    role="region"
+                  >
                     <div className={styles.answerInner}>{faq.a}</div>
                   </div>
                 </div>

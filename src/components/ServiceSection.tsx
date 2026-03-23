@@ -9,7 +9,6 @@ interface SubService {
   imageDark?: string;
   imageLight?: string;
   image?: string;
-  href?: string;
 }
 
 interface ServiceSectionProps {
@@ -18,29 +17,30 @@ interface ServiceSectionProps {
   description: string;
   services: SubService[];
   ctaLink: string;
-  alt?: boolean;
   theme: string;
 }
 
 export default function ServiceSection({
-  number, title, description, services, ctaLink, alt, theme
+  number, title, description, services, ctaLink, theme
 }: ServiceSectionProps) {
   return (
-    <section className={alt ? styles.sectionAlt : styles.section}>
+    <section className={`${styles.section} fadeIn`}>
       <div className="container">
+        <p className="headline">Services</p>
         <div className={styles.row}>
-          {/* Left: Number + Title */}
+          {/* Left: Number + Title (sticky) */}
           <div className={styles.colLeft}>
-            <h2 className={styles.sectionHeading}>
-              <span className={styles.sectionNumber}>{number}</span> {title}
-            </h2>
+            <div className={styles.stickyWrap}>
+              <span className={styles.serviceNumber}>{number}</span>
+              <h2 className={styles.serviceTitle}>{title}</h2>
+            </div>
           </div>
 
           {/* Right: Description + Button + Items */}
           <div className={styles.colRight}>
-            <p className={styles.sectionDesc}>{description}</p>
+            <p className={styles.serviceDesc}>{description}</p>
             <div className={styles.btnWrap}>
-              <Link href={ctaLink} className="btn btn--primary">View More</Link>
+              <Link href={ctaLink} className="btn">View More</Link>
             </div>
 
             <div className={styles.servicesList}>
@@ -60,8 +60,8 @@ export default function ServiceSection({
                         />
                       </div>
                     )}
-                    <h3>{s.title}</h3>
-                    <p>{s.description}</p>
+                    <h3 className={styles.serviceItemTitle}>{s.title}</h3>
+                    <p className={styles.serviceItemDesc}>{s.description}</p>
                   </div>
                 );
               })}

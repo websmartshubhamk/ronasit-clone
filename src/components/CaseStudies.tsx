@@ -40,53 +40,55 @@ const cases = [
 export default function CaseStudies({ theme }: { theme: string }) {
   return (
     <div className={styles.wrapper}>
-      {/* Header */}
-      <div className={styles.header}>
+      {/* Section header */}
+      <div className={`${styles.header} fadeIn`}>
         <div className="container">
-          <div className={styles.headerRow}>
-            <div className={styles.headerCol}>
-              <h2>Explore Our Success Stories and Expertise in Software Development</h2>
-              <p>
-                As a software development company, we are not only releasing successful
-                projects but also constantly sharing our experience. Take a look at some
-                projects that we have implemented.
-              </p>
-            </div>
+          <p className="headline">Projects</p>
+          <div className={styles.headerContent}>
+            <h2 className={styles.headerTitle}>
+              Explore Our Success Stories and Expertise in Software Development
+            </h2>
+            <p className={styles.headerDesc}>
+              As a software development company, we are not only releasing successful
+              projects but also constantly sharing our experience. Take a look at some
+              projects that we have implemented.
+            </p>
           </div>
         </div>
       </div>
 
       {/* Individual project sections */}
-      {cases.map((c, i) => (
-        <div
-          key={c.title}
-          className={`${styles.project} ${i % 2 === 1 ? styles.projectEven : ''}`}
-        >
-          <div className={styles.projectDetails}>
-            <div className="container">
-              <div className={styles.projectRow}>
-                <div className={styles.projectText}>
-                  <div className={styles.projectLabel}>{c.title}</div>
-                  <h4 className={styles.projectTitle}>{c.description}</h4>
-                  <div className={styles.projectTags}>
-                    {c.tags.map((tag) => (
-                      <span key={tag} className={styles.tag}>{tag}</span>
-                    ))}
-                  </div>
-                  <a
-                    href={c.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn--primary"
-                  >
-                    View More
-                  </a>
+      {cases.map((c) => (
+        <div key={c.title} className={`${styles.project} fadeIn`}>
+          <div className="container">
+            <div className={styles.projectRow}>
+              {/* Text side */}
+              <div className={styles.projectText}>
+                <p className="headline">{c.title}</p>
+                <h4 className={styles.projectTitle}>{c.description}</h4>
+                <div className={styles.projectTags}>
+                  {c.tags.map((tag) => (
+                    <span key={tag} className={styles.tag}>{tag}</span>
+                  ))}
                 </div>
+                <a
+                  href={c.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn"
+                >
+                  View More
+                </a>
+              </div>
+
+              {/* Image side: sticky on desktop */}
+              <div className={styles.projectImageWrap}>
                 <div className={styles.projectImage}>
                   <Image
                     src={theme === 'dark' ? c.dark : c.light}
                     alt={c.title}
                     fill
+                    sizes="(max-width: 1023px) 100vw, 50vw"
                     style={{ objectFit: 'cover' }}
                   />
                 </div>

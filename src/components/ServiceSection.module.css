@@ -1,9 +1,5 @@
 .section {
-  padding: 90px 0;
-}
-.sectionAlt {
-  padding: 90px 0;
-  background: var(--background-second);
+  padding: 4rem 0;
 }
 
 .row {
@@ -11,67 +7,73 @@
   flex-wrap: wrap;
 }
 
-/* Left column: number + title */
+/* Left column: 40% with sticky heading */
 .colLeft {
   width: 40%;
   padding-right: 30px;
-  position: sticky;
-  top: 120px;
-  align-self: flex-start;
 }
 
-.sectionHeading {
+.stickyWrap {
+  position: sticky;
+  top: calc(150px + 3.5rem);
+}
+
+/* Number: SMALL regular text above the h2 */
+.serviceNumber {
+  font-size: 1rem;
+  font-weight: 400;
+  display: block;
+  margin-top: -3rem;
+  margin-bottom: 2rem;
+  color: var(--text-opaque);
+}
+
+.serviceTitle {
   font-size: 2.85rem;
   font-weight: 500;
   line-height: 1.2;
+  color: var(--text);
 }
 
-.sectionNumber {
-  color: var(--primary);
-  margin-right: 4px;
-}
-
-/* Right column: description + button + service items */
+/* Right column: 60% */
 .colRight {
   width: 60%;
 }
 
-.sectionDesc {
+.serviceDesc {
+  font-size: 1.5rem;
+  line-height: 150%;
+  margin-bottom: 2.5rem;
   color: var(--text-opaque);
-  font-size: 1.14rem;
-  line-height: 1.7rem;
-  margin-bottom: 2rem;
 }
 
 .btnWrap {
   margin-bottom: 3rem;
 }
 
-/* Service items - stacked vertically */
+/* Service items: 50% width, side by side on desktop */
 .servicesList {
   display: flex;
-  flex-direction: column;
-  gap: 48px;
+  flex-flow: wrap;
+  margin-top: 7rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
 }
 
 .serviceItem {
+  flex: 0 0 50%;
+  min-height: 350px;
+  margin-bottom: 3rem;
+  padding: 0 1.5rem;
+  position: relative;
   cursor: pointer;
-}
-
-.serviceLink {
-  color: var(--primary);
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: none;
-  display: inline-block;
-  margin-bottom: 1rem;
 }
 
 .serviceImage {
   width: 100%;
   border-radius: 20px;
   overflow: hidden;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   background: var(--background-image);
 }
 
@@ -86,37 +88,58 @@
   transform: scale(1.02);
 }
 
-.serviceItem h3 {
+.serviceItemTitle {
+  min-height: 4rem;
   font-size: 1.875rem;
-  font-weight: 600;
-  line-height: 1.3;
-  margin-bottom: 0.75rem;
+  font-weight: 500;
+  line-height: 2.2rem;
+  margin-bottom: 0.5rem;
   transition: color 0.3s;
+  color: var(--text);
 }
 
-.serviceItem:hover h3 {
+.serviceItem:hover .serviceItemTitle {
   color: var(--primary);
 }
 
-.serviceItem p {
+.serviceItemDesc {
   color: var(--text-opaque);
   font-size: 1rem;
   line-height: 1.8;
 }
 
 @media (max-width: 1023px) {
-  .section, .sectionAlt { padding: 60px 0; }
+  .section { padding: 3rem 0; }
   .colLeft {
     width: 100%;
     padding-right: 0;
-    position: static;
     margin-bottom: 2rem;
   }
+  .stickyWrap {
+    position: static;
+  }
   .colRight { width: 100%; }
-  .sectionHeading { font-size: 2.28rem; }
+  .serviceTitle { font-size: 2.28rem; }
+  .serviceNumber { margin-top: 0; }
+  .servicesList { margin-top: 3rem; margin-left: 0; margin-right: 0; }
+  .serviceItem { flex: 0 0 50%; padding: 0 0.75rem; min-height: auto; }
 }
+
 @media (max-width: 767px) {
-  .section, .sectionAlt { padding: 40px 0; }
-  .sectionHeading { font-size: 1.8rem; }
-  .serviceItem h3 { font-size: 1.5rem; }
+  .serviceTitle { font-size: 1.8rem; }
+  .serviceDesc { font-size: 1.14rem; }
+  .serviceItem {
+    flex: 0 0 100%;
+    margin-bottom: 4rem;
+    padding: 0;
+    min-height: auto;
+  }
+  .serviceItemTitle { min-height: auto; font-size: 1.5rem; }
+  .serviceImage {
+    opacity: 1;
+    width: 100%;
+    margin-bottom: 1rem;
+    display: block;
+    position: static;
+  }
 }
