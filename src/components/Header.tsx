@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Header.module.css';
@@ -9,9 +9,77 @@ interface HeaderProps {
   toggleTheme: () => void;
 }
 
+const megaMenuData = {
+  'AI Services': [
+    { label: 'Custom MCP Servers', href: '/services' },
+    { label: 'AI Agent Development', href: '/services' },
+    { label: 'AI Integration', href: '/services' },
+    { label: 'AI Marketing', href: '/services' },
+    { label: 'AI Business', href: '/services' },
+    { label: 'AI Apps', href: '/services' },
+    { label: 'AI Consulting', href: '/services' },
+    { label: 'AI Chatbots', href: '/services' },
+    { label: 'AI Software', href: '/services' },
+    { label: 'Vibe Coding Rescue', href: '/services' },
+  ],
+  'Development': [
+    { label: 'Custom Software', href: '/services' },
+    { label: 'Web Development', href: '/services' },
+    { label: 'React Native', href: '/services' },
+    { label: 'Web Apps', href: '/services' },
+    { label: 'Mobile Apps', href: '/services' },
+    { label: 'iOS Development', href: '/services' },
+    { label: 'Android Development', href: '/services' },
+    { label: 'E-commerce', href: '/services' },
+    { label: 'Frontend Development', href: '/services' },
+    { label: 'Backend Development', href: '/services' },
+    { label: 'Enterprise Software', href: '/services' },
+    { label: 'Dedicated Teams', href: '/services' },
+  ],
+  'Design': [
+    { label: 'Graphic Design', href: '/services' },
+    { label: 'Logos', href: '/services' },
+    { label: 'Branding', href: '/services' },
+    { label: 'Illustration', href: '/services' },
+    { label: 'Web Design', href: '/services' },
+    { label: 'Creative Landing', href: '/services' },
+    { label: 'Concept Design', href: '/services' },
+    { label: 'Desktop Design', href: '/services' },
+    { label: 'Mobile App Design', href: '/services' },
+    { label: 'Tablet Design', href: '/services' },
+    { label: 'UI/UX Design', href: '/services' },
+  ],
+  'For Startups': [
+    { label: 'MVP Development', href: '/services' },
+    { label: 'Design Services', href: '/services' },
+    { label: 'App Development', href: '/services' },
+    { label: 'CTO Services', href: '/services' },
+    { label: 'Software Development', href: '/services' },
+    { label: 'Analytics', href: '/services' },
+  ],
+  'DevOps': [
+    { label: 'DevOps Services', href: '/services' },
+    { label: 'Fast Start with Google Cloud', href: '/services' },
+  ],
+};
+
+const howWeWorkLinks = [
+  { label: 'About Us', href: '/about' },
+  { label: 'Our Approach', href: '/how-we-work' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Price', href: '/pricing' },
+];
+
 export default function Header({ theme, toggleTheme }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [howDropdownOpen, setHowDropdownOpen] = useState(false);
+
+  const megaMenuTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const howDropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const megaMenuRef = useRef<HTMLDivElement>(null);
+  const howDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -19,7 +87,39 @@ export default function Header({ theme, toggleTheme }: HeaderProps) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Close mega menu on outside click
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (megaMenuRef.current && !megaMenuRef.current.contains(e.target as Node)) {
+        setMegaMenuOpen(false);
+      }
+      if (howDropdownRef.current && !howDropdownRef.current.contains(e.target as Node)) {
+        setHowDropdownOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
+
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+  const handleMegaEnter = () => {
+    if (megaMenuTimeout.current) clearTimeout(megaMenuTimeout.current);
+    setMegaMenuOpen(true);
+  };
+
+  const handleMegaLeave = () => {
+    megaMenuTimeout.current = setTimeout(() => setMegaMenuOpen(false), 200);
+  };
+
+  const handleHowEnter = () => {
+    if (howDropdownTimeout.current) clearTimeout(howDropdownTimeout.current);
+    setHowDropdownOpen(true);
+  };
+
+  const handleHowLeave = () => {
+    howDropdownTimeout.current = setTimeout(() => setHowDropdownOpen(false), 200);
+  };
 
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
@@ -30,11 +130,70 @@ export default function Header({ theme, toggleTheme }: HeaderProps) {
         </Link>
 
         <nav className={styles.nav}>
-          <Link href="/services" className={styles.navLink}>Services</Link>
+          {/* Services with mega menu */}
+          <div
+            ref={megaMenuRef}
+            className={styles.navItemWithDropdown}
+            onMouseEnter={handleMegaEnter}
+            onMouseLeave={handleMegaLeave}
+          >
+            <Link href="/services" className={`${styles.navLink} ${megaMenuOpen ? styles.navLinkActive : ''}`}>
+              Services
+              <svg className={styles.navChevron} width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <polyline points="2 4 5 7 8 4" />
+              </svg>
+            </Link>
+            <div className={`${styles.megaMenu} ${megaMenuOpen ? styles.megaMenuOpen : ''}`}>
+              <div className={styles.megaMenuInner}>
+                {Object.entries(megaMenuData).map(([group, links]) => (
+                  <div key={group} className={styles.megaMenuCol}>
+                    <h6 className={styles.megaMenuHeading}>{group}</h6>
+                    <ul className={styles.megaMenuList}>
+                      {links.map((link) => (
+                        <li key={link.label}>
+                          <Link href={link.href} className={styles.megaMenuLink} onClick={() => setMegaMenuOpen(false)}>
+                            {link.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <Link href="/design-projects" className={styles.navLink}>Design Projects</Link>
           <Link href="/cases" className={styles.navLink}>Cases</Link>
           <Link href="/pricing" className={styles.navLink}>Pricing</Link>
-          <Link href="/how-we-work" className={styles.navLink}>How we work</Link>
+
+          {/* How we work with simple dropdown */}
+          <div
+            ref={howDropdownRef}
+            className={styles.navItemWithDropdown}
+            onMouseEnter={handleHowEnter}
+            onMouseLeave={handleHowLeave}
+          >
+            <Link href="/how-we-work" className={`${styles.navLink} ${howDropdownOpen ? styles.navLinkActive : ''}`}>
+              How we work
+              <svg className={styles.navChevron} width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <polyline points="2 4 5 7 8 4" />
+              </svg>
+            </Link>
+            <div className={`${styles.simpleDropdown} ${howDropdownOpen ? styles.simpleDropdownOpen : ''}`}>
+              {howWeWorkLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={styles.simpleDropdownLink}
+                  onClick={() => setHowDropdownOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           <Link href="/blog" className={styles.navLink}>Blog</Link>
         </nav>
 
@@ -84,6 +243,8 @@ export default function Header({ theme, toggleTheme }: HeaderProps) {
           <Link href="/cases" className={styles.mobileNavLink} onClick={closeMenu}>Cases</Link>
           <Link href="/pricing" className={styles.mobileNavLink} onClick={closeMenu}>Pricing</Link>
           <Link href="/how-we-work" className={styles.mobileNavLink} onClick={closeMenu}>How we work</Link>
+          <Link href="/about" className={styles.mobileNavLink} onClick={closeMenu}>About Us</Link>
+          <Link href="/contact" className={styles.mobileNavLink} onClick={closeMenu}>Contact</Link>
           <Link href="/blog" className={styles.mobileNavLink} onClick={closeMenu}>Blog</Link>
         </nav>
         <Link href="/contact" className={styles.mobileCtaBtn} onClick={closeMenu}>

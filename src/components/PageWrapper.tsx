@@ -2,6 +2,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import CookieConsent from '@/components/CookieConsent';
+import BackToTop from '@/components/BackToTop';
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -50,7 +52,9 @@ export default function PageWrapper({ children }: PageWrapperProps) {
       <main style={{ paddingTop: '100px' }}>
         {children}
       </main>
-      <Footer />
+      <Footer theme={theme} toggleTheme={toggleTheme} />
+      <CookieConsent />
+      <BackToTop />
     </>
   );
 }

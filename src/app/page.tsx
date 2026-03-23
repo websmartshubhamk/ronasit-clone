@@ -10,6 +10,8 @@ import Testimonials from '@/components/Testimonials';
 import Stats from '@/components/Stats';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
+import CookieConsent from '@/components/CookieConsent';
+import BackToTop from '@/components/BackToTop';
 
 const designServices = [
   {
@@ -149,7 +151,9 @@ export default function Home() {
         <Stats theme={theme} />
         <FAQ />
       </main>
-      <Footer />
+      <Footer theme={theme} toggleTheme={toggleTheme} />
+      <CookieConsent />
+      <BackToTop />
     </>
   );
 }

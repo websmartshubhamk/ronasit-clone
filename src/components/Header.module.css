@@ -70,10 +70,142 @@
   font-size: 0.875rem;
   text-decoration: none;
   transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .navLink:hover {
   color: var(--primary);
+}
+
+.navLinkActive {
+  color: var(--primary);
+}
+
+.navChevron {
+  transition: transform 0.3s ease;
+}
+
+.navLinkActive .navChevron {
+  transform: rotate(180deg);
+}
+
+/* Nav item with dropdown wrapper */
+.navItemWithDropdown {
+  position: relative;
+}
+
+/* ---- Mega Menu ---- */
+.megaMenu {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  background: var(--background-opaque);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--text-transparent);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.megaMenuOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.megaMenuInner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2rem 6.5rem 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+}
+
+.megaMenuCol {
+  min-width: 0;
+}
+
+.megaMenuHeading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--text-transparent);
+}
+
+.megaMenuList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.megaMenuLink {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--text-opaque);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  transition: color 0.2s;
+  line-height: 1.5;
+}
+
+.megaMenuLink:hover {
+  color: var(--primary);
+}
+
+/* ---- Simple Dropdown (How we work) ---- */
+.simpleDropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  min-width: 180px;
+  background: var(--background-opaque);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--text-transparent);
+  border-radius: 12px;
+  padding: 0.5rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.simpleDropdownOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.simpleDropdownLink {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.8125rem;
+  color: var(--text-opaque);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.simpleDropdownLink:hover {
+  color: var(--primary);
+  background: var(--text-transparent);
 }
 
 /* Actions */

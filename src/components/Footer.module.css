@@ -31,41 +31,63 @@
   color: var(--text);
 }
 
-/* Links grid */
+/* Links grid - 9 columns on desktop */
 .linksGrid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 20px;
   padding: 40px 0;
   border-top: 1px solid var(--text-transparent);
 }
 
 .linkCol h6 {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* Accordion header button - hidden on desktop */
+.linkColHeader {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: default;
+  padding: 0;
+  text-align: left;
   color: var(--text);
 }
 
-.linkCol ul {
+.accordionIcon {
+  display: none;
+  transition: transform 0.3s;
+}
+
+.accordionIconOpen {
+  transform: rotate(180deg);
+}
+
+.linkList {
   list-style: none;
 }
 
-.linkCol li {
-  margin-bottom: 8px;
+.linkList li {
+  margin-bottom: 6px;
 }
 
-.linkCol a {
+.linkList a {
   color: var(--text-opaque);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   text-decoration: none;
   transition: color 0.2s;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
-.linkCol a:hover {
+.linkList a:hover {
   color: var(--text);
 }
 
@@ -78,6 +100,7 @@
   padding-top: 40px;
   border-top: 1px solid var(--text-transparent);
   margin-bottom: 40px;
+  gap: 24px;
 }
 
 .contactInfo {
@@ -111,6 +134,37 @@
   color: var(--text-opaque);
   font-size: 0.75rem;
   margin-bottom: 4px;
+}
+
+.contactRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Footer theme toggle */
+.footerThemeToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--text-transparent);
+  border-radius: 30px;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: var(--text-opaque);
+  font-family: 'ZonaPro', sans-serif;
+  font-size: 0.75rem;
+  transition: all 0.3s;
+}
+
+.footerThemeToggle:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.footerThemeLabel {
+  white-space: nowrap;
 }
 
 .social {
@@ -170,16 +224,65 @@
   color: var(--text);
 }
 
+@media (max-width: 1280px) {
+  .linksGrid { grid-template-columns: repeat(5, 1fr); }
+}
+
 @media (max-width: 1023px) {
   .footer { min-height: auto; }
   .inner { min-height: auto; }
-  .linksGrid { grid-template-columns: repeat(3, 1fr); }
+  .linksGrid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .ctaTitle { font-size: 2.5rem; }
 }
 
 @media (max-width: 767px) {
-  .linksGrid { grid-template-columns: repeat(2, 1fr); }
+  .linksGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 20px 0;
+  }
+
+  .linkCol {
+    border-bottom: 1px solid var(--text-transparent);
+  }
+
+  .linkCol:last-child {
+    border-bottom: none;
+  }
+
+  .linkColHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 14px 0;
+  }
+
+  .linkCol h6 {
+    margin-bottom: 0;
+  }
+
+  .accordionIcon {
+    display: block;
+    color: var(--text-opaque);
+    flex-shrink: 0;
+  }
+
+  .linkList {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding-bottom: 0;
+  }
+
+  .linkListOpen {
+    max-height: 300px;
+    padding-bottom: 14px;
+  }
+
   .contactInfo { flex-direction: column; gap: 20px; }
+  .contactRow { flex-direction: column; }
+  .contactRight { flex-direction: column; align-items: flex-start; gap: 16px; }
   .bottom { flex-direction: column; align-items: flex-start; }
   .getInTouch { padding: 3rem 0; }
 }
