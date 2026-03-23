@@ -1,0 +1,120 @@
+.hero {
+  padding: 4rem 0 2rem;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 2rem + 3vw, 4rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.heroSubtitle {
+  font-size: 1.14rem;
+  line-height: 1.7rem;
+  color: var(--text-opaque);
+  max-width: 640px;
+}
+
+.goalSection {
+  padding: 4rem 0;
+}
+
+.goalGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.goalLeft {
+  width: 35%;
+}
+
+.goalRight {
+  width: 60%;
+}
+
+.goalTitle {
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.goalText {
+  font-size: 1.14rem;
+  line-height: 1.7rem;
+  color: var(--text-opaque);
+}
+
+.goalText p {
+  margin-bottom: 1.5rem;
+}
+
+.statsSection {
+  padding: 4rem 0;
+  border-top: 1px solid var(--text-transparent);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.statCard {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.statNumber {
+  font-size: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.statLabel {
+  font-size: 1rem;
+  color: var(--text-opaque);
+  line-height: 1.5;
+}
+
+.awardsSection {
+  padding: 4rem 0;
+  border-top: 1px solid var(--text-transparent);
+}
+
+.awardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.awardCard {
+  background: var(--background-second);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+}
+
+.awardName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.awardDesc {
+  font-size: 0.95rem;
+  color: var(--text-opaque);
+  line-height: 1.6;
+}
+
+@media (max-width: 1023px) {
+  .goalLeft, .goalRight { width: 100%; }
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .awardsGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 767px) {
+  .statsGrid { grid-template-columns: 1fr 1fr; }
+}

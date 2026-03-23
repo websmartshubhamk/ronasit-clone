@@ -1,0 +1,172 @@
+.hero {
+  padding: 4rem 0 2rem;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 2rem + 3vw, 4rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.14rem;
+  line-height: 1.7rem;
+  color: var(--text-opaque);
+}
+
+.heroSubtitle a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.heroSubtitle a:hover {
+  color: var(--primary-hover);
+}
+
+.contentGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  padding: 2rem 0 4rem;
+}
+
+.formCol {
+  width: 60%;
+}
+
+.contactCol {
+  width: 35%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 14px 20px;
+  border: 1px solid var(--text-transparent);
+  border-radius: 12px;
+  background: var(--background);
+  color: var(--text);
+  font-family: 'ZonaPro', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: border-color 0.3s;
+  outline: none;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--primary);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-opaque);
+}
+
+.textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  font-size: 0.875rem;
+  color: var(--text-opaque);
+}
+
+.submitRow {
+  padding-top: 0.5rem;
+}
+
+.directContact {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contactItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.contactLabel {
+  font-size: 0.75rem;
+  color: var(--text-opaque);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contactValue {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contactValue:hover {
+  color: var(--primary);
+}
+
+.messengerLinks {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.messengerLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border-radius: 30px;
+  border: 1px solid var(--text-transparent);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.messengerLink:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+@media (max-width: 1023px) {
+  .formCol, .contactCol { width: 100%; }
+  .contentGrid { gap: 3rem; }
+}

@@ -1,0 +1,90 @@
+.hero {
+  padding: 4rem 0 2rem;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 2rem + 3vw, 4rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.heroSubtitle {
+  font-size: 1.14rem;
+  line-height: 1.7rem;
+  color: var(--text-opaque);
+  max-width: 640px;
+}
+
+.projectsSection {
+  padding: 2rem 0 4rem;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.projectCard {
+  background: var(--background-second);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.projectCard:hover {
+  transform: translateY(-4px);
+}
+
+.projectImage {
+  width: 100%;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.projectBody {
+  padding: 2rem;
+}
+
+.projectTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.projectDesc {
+  font-size: 0.95rem;
+  color: var(--text-opaque);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.projectTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  display: inline-flex;
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--text-transparent);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-opaque);
+}
+
+@media (max-width: 1023px) {
+  .projectsGrid { grid-template-columns: 1fr; }
+}
