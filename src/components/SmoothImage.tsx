@@ -11,7 +11,7 @@ export default function SmoothImage({ wrapperClassName, className, onLoad, ...pr
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className={`${styles.wrapper} ${wrapperClassName ?? ''}`}>
+    <div className={`${styles.wrapper} ${loaded ? styles.wrapperLoaded : ''} ${wrapperClassName ?? ''}`}>
       <Image
         {...props}
         className={`${styles.image} ${loaded ? styles.loaded : ''} ${className ?? ''}`}

@@ -109,10 +109,67 @@ export default function Home() {
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
 
-    const fadeEls = document.querySelectorAll('.fadeIn');
+    const fadeEls = document.querySelectorAll('.fadeIn, .fadeInUp, .fadeInLeft, .fadeInRight');
     fadeEls.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
+  }, []);
+
+  /* Mouse-attract effect on all .btn elements */
+  useEffect(() => {
+    const strength = 0.1;
+    const buttons = document.querySelectorAll<HTMLElement>('.btn');
+
+    const handlers: Array<{
+      el: HTMLElement;
+      move: (e: MouseEvent) => void;
+      leave: () => void;
+    }> = [];
+
+    buttons.forEach((btn) => {
+      // Wrap content in an inner span if not already wrapped
+      let inner = btn.querySelector('[data-attract]') as HTMLElement | null;
+      if (!inner) {
+        inner = document.createElement('span');
+        inner.setAttribute('data-attract', 'true');
+        inner.style.display = 'inline-flex';
+        inner.style.alignItems = 'center';
+        inner.style.justifyContent = 'center';
+        inner.style.gap = 'inherit';
+        inner.style.transition = 'transform 0.3s ease-out';
+        inner.style.pointerEvents = 'none';
+        inner.style.position = 'relative';
+        inner.style.zIndex = '1';
+        while (btn.firstChild) {
+          inner.appendChild(btn.firstChild);
+        }
+        btn.appendChild(inner);
+      }
+
+      const move = (e: MouseEvent) => {
+        const rect = btn.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) * strength;
+        const y = (e.clientY - rect.top - rect.height / 2) * strength;
+        inner!.style.transition = 'transform 0.1s ease-out';
+        inner!.style.transform = `translate(${x}px, ${y}px)`;
+      };
+
+      const leave = () => {
+        inner!.style.transition = 'transform 0.3s ease-out';
+        inner!.style.transform = 'translate(0px, 0px)';
+      };
+
+      btn.addEventListener('mousemove', move);
+      btn.addEventListener('mouseleave', leave);
+      handlers.push({ el: btn, move, leave });
+    });
+
+    return () => {
+      handlers.forEach(({ el, move, leave }) => {
+        el.removeEventListener('mousemove', move);
+        el.removeEventListener('mouseleave', leave);
+      });
+    };
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './Testimonials.module.css';
 
@@ -36,6 +36,18 @@ const testimonials = [
 
 export default function Testimonials() {
   const [active, setActive] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  const handleSwitch = useCallback((i: number) => {
+    if (i === active || animating) return;
+    setAnimating(true);
+    // Brief exit, then switch
+    setTimeout(() => {
+      setActive(i);
+      setTimeout(() => setAnimating(false), 50);
+    }, 300);
+  }, [active, animating]);
+
   const t = testimonials[active];
 
   return (
@@ -54,7 +66,7 @@ export default function Testimonials() {
                   key={item.name}
                   type="button"
                   className={`${styles.tab} ${i === active ? styles.tabActive : ''}`}
-                  onClick={() => setActive(i)}
+                  onClick={() => handleSwitch(i)}
                 >
                   {item.name}
                 </button>
@@ -64,7 +76,7 @@ export default function Testimonials() {
 
           {/* Right: 75% - feedback content */}
           <div className={styles.colRight}>
-            <div className={styles.feedbackItem}>
+            <div className={`${styles.feedbackItem} ${animating ? styles.feedbackExiting : styles.feedbackActive}`}>
               <div className={styles.rating}>
                 <span className={styles.ratingValue}>{t.rating}</span>
                 <span className={styles.ratingSep} />

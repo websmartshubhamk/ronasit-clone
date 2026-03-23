@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import styles from './CaseStudies.module.css';
 
@@ -37,6 +38,72 @@ const cases = [
   },
 ];
 
+function ProjectItem({ c, theme }: { c: typeof cases[0]; theme: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`${styles.project} ${visible ? styles.projectVisible : ''} fadeIn`}
+    >
+      <div className="container">
+        <div className={styles.projectRow}>
+          {/* Text side */}
+          <div className={styles.projectText}>
+            <p className="headline">{c.title}</p>
+            <h4 className={styles.projectTitle}>{c.description}</h4>
+            <div className={styles.projectTags}>
+              {c.tags.map((tag) => (
+                <span key={tag} className={styles.tag}>{tag}</span>
+              ))}
+            </div>
+            <a
+              href={c.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+            >
+              View More
+            </a>
+          </div>
+
+          {/* Image side: sticky on desktop */}
+          <div className={styles.projectImageWrap}>
+            <div className={styles.projectImage}>
+              <Image
+                src={theme === 'dark' ? c.dark : c.light}
+                alt={c.title}
+                fill
+                sizes="(max-width: 1023px) 100vw, 50vw"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function CaseStudies({ theme }: { theme: string }) {
   return (
     <div className={styles.wrapper}>
@@ -59,43 +126,7 @@ export default function CaseStudies({ theme }: { theme: string }) {
 
       {/* Individual project sections */}
       {cases.map((c) => (
-        <div key={c.title} className={`${styles.project} fadeIn`}>
-          <div className="container">
-            <div className={styles.projectRow}>
-              {/* Text side */}
-              <div className={styles.projectText}>
-                <p className="headline">{c.title}</p>
-                <h4 className={styles.projectTitle}>{c.description}</h4>
-                <div className={styles.projectTags}>
-                  {c.tags.map((tag) => (
-                    <span key={tag} className={styles.tag}>{tag}</span>
-                  ))}
-                </div>
-                <a
-                  href={c.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn"
-                >
-                  View More
-                </a>
-              </div>
-
-              {/* Image side: sticky on desktop */}
-              <div className={styles.projectImageWrap}>
-                <div className={styles.projectImage}>
-                  <Image
-                    src={theme === 'dark' ? c.dark : c.light}
-                    alt={c.title}
-                    fill
-                    sizes="(max-width: 1023px) 100vw, 50vw"
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProjectItem key={c.title} c={c} theme={theme} />
       ))}
     </div>
   );

@@ -88,21 +88,28 @@
   opacity: 0;
 }
 
+/* Smooth height animation via CSS grid */
 .answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease-in-out;
 }
 
 .answerOpen {
-  max-height: 500px;
+  grid-template-rows: 1fr;
 }
 
 .answerInner {
-  padding: 0 0 24px;
+  overflow: hidden;
+  padding: 0;
   color: var(--text-opaque);
   line-height: 1.8;
   font-size: 1rem;
+  transition: padding 0.5s ease-in-out;
+}
+
+.answerOpen .answerInner {
+  padding: 0 0 24px;
 }
 
 @media (max-width: 1023px) {

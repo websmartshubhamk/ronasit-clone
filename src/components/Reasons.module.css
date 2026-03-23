@@ -39,6 +39,14 @@
   display: flex;
   align-items: flex-start;
   gap: 20px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.itemVisible {
+  opacity: 1;
+  transform: none;
 }
 
 .item:not(:last-child) {

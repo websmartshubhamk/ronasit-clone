@@ -1,3 +1,5 @@
+'use client';
+import { useEffect, useRef, useState } from 'react';
 import styles from './Reasons.module.css';
 
 const reasons = [
@@ -32,6 +34,27 @@ const reasons = [
 ];
 
 export default function Reasons() {
+  const listRef = useRef<HTMLUListElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = listRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className={`${styles.section} fadeIn`}>
       <div className="container">
@@ -43,9 +66,13 @@ export default function Reasons() {
           </div>
           <div className={styles.colRight}>
             <div className={styles.inner}>
-              <ul className={styles.list}>
+              <ul className={styles.list} ref={listRef}>
                 {reasons.map((r, i) => (
-                  <li key={i} className={styles.item}>
+                  <li
+                    key={i}
+                    className={`${styles.item} ${visible ? styles.itemVisible : ''}`}
+                    style={{ transitionDelay: visible ? `${i * 0.3}s` : '0s' }}
+                  >
                     <span className={styles.itemIcon}>{r.icon}</span>
                     <h5 className={styles.itemText}>{r.text}</h5>
                   </li>

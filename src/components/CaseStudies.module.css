@@ -84,6 +84,13 @@
   border-radius: 20px;
   overflow: hidden;
   background: var(--background-case-image);
+  clip-path: circle(0% at 50% 100%);
+  transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reveal when project is visible */
+.projectVisible .projectImage {
+  clip-path: circle(150% at 50% 100%);
 }
 
 .projectImage img {
@@ -91,7 +98,7 @@
 }
 
 .project:hover .projectImage img {
-  transform: scale(1.02);
+  transform: scale(1.05);
 }
 
 @media (max-width: 1023px) {

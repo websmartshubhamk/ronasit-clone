@@ -1,15 +1,32 @@
+/* Shimmer skeleton loading */
 .wrapper {
   position: relative;
   overflow: hidden;
+  background: linear-gradient(-45deg, #92a1ae1a 33%, #92a1ae00 50%, #92a1ae1a 66%) 0 0 / 300% 300%;
+  animation: shimmer 1.5s linear infinite;
 }
 
+@keyframes shimmer {
+  0% { background-position: -150% 0; }
+  50% { background-position: -50% 0; }
+  100% { background-position: -50% 100%; }
+}
+
+/* Image starts scaled down and transparent */
 .image {
-  opacity: 0;
-  filter: blur(8px);
-  transition: opacity 0.6s ease, filter 0.6s ease;
+  opacity: 0.01;
+  transform-origin: 50%;
+  transform: scale(0.95, 1.1);
+  transition: opacity 1s, transform 0.7s ease-out !important;
+}
+
+/* Loaded state: remove shimmer, reveal image */
+.wrapperLoaded {
+  background: none;
+  animation: none;
 }
 
 .loaded {
   opacity: 1;
-  filter: blur(0);
+  transform: none;
 }

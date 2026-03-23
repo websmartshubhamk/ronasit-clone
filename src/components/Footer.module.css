@@ -12,7 +12,7 @@
   min-height: calc(100vh - 100px);
 }
 
-/* Get in Touch CTA: fills remaining space, centered */
+/* Get in Touch CTA: fills remaining space, centered, with fade-up entrance */
 .getInTouch {
   flex: 1 0 auto;
   display: flex;
@@ -22,6 +22,14 @@
   text-align: center;
   padding: 4rem 0;
   gap: 2rem;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.getInTouchVisible {
+  opacity: 1;
+  transform: none;
 }
 
 .ctaTitle {

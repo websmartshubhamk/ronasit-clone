@@ -55,9 +55,21 @@
   color: var(--text);
 }
 
-/* Feedback */
+/* Feedback with cross-fade transition */
 .feedbackItem {
-  /* single item displayed */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.feedbackActive {
+  opacity: 1;
+  transform: none;
+}
+
+.feedbackExiting {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
 .rating {

@@ -1,5 +1,7 @@
+'use client';
 import Image from 'next/image';
 import styles from './Stats.module.css';
+import { useCountUp } from '@/hooks/useCountUp';
 
 const platforms = [
   { name: 'Upwork', rating: 4.9, reviews: 1813 },
@@ -15,6 +17,19 @@ const badges = [
   'Google Cloud Partner',
 ];
 
+function CountUpStat({ end, suffix, label }: { end: number; suffix?: string; label: string }) {
+  const { ref, display } = useCountUp({ end, duration: 2000, decimals: end % 1 !== 0 ? 1 : 0 });
+
+  return (
+    <div className={styles.stat}>
+      <div className={styles.statNumber} ref={ref}>
+        {display}{suffix || ''}
+      </div>
+      <div className={styles.statLabel}>{label}</div>
+    </div>
+  );
+}
+
 export default function Stats({ theme }: { theme: string }) {
   return (
     <section className={`${styles.section} fadeIn`}>
@@ -22,18 +37,12 @@ export default function Stats({ theme }: { theme: string }) {
         <p className="headline">Numbers</p>
 
         <div className={styles.topStats}>
-          <div className={styles.stat}>
-            <div className={styles.statNumber}>1870</div>
-            <div className={styles.statLabel}>reviews across 5 platforms</div>
-          </div>
+          <CountUpStat end={1870} label="reviews across 5 platforms" />
           <div className={styles.stat}>
             <div className={styles.statNumber}>Top 50</div>
             <div className={styles.statLabel}>app development companies on Upwork</div>
           </div>
-          <div className={styles.stat}>
-            <div className={styles.statNumber}>4.9 / 5</div>
-            <div className={styles.statLabel}>average rate</div>
-          </div>
+          <CountUpStat end={4.9} suffix=" / 5" label="average rate" />
         </div>
 
         <div className={styles.divider} />

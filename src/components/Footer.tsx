@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styles from './Footer.module.css';
 
@@ -103,17 +103,40 @@ const linkColumns = [
 
 export default function Footer({ theme, toggleTheme }: FooterProps) {
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const [ctaVisible, setCtaVisible] = useState(false);
 
   const toggleAccordion = (idx: number) => {
     setOpenAccordion(openAccordion === idx ? null : idx);
   };
+
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCtaVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.inner}>
           {/* Get in Touch CTA */}
-          <div className={styles.getInTouch}>
+          <div
+            ref={ctaRef}
+            className={`${styles.getInTouch} ${ctaVisible ? styles.getInTouchVisible : ''}`}
+          >
             <h2 className={styles.ctaTitle}>Get in Touch</h2>
             <Link href="/contact" className="btn">
               Estimate Project

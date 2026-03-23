@@ -5,15 +5,26 @@
   right: 0;
   z-index: 10;
   height: 100px;
-  transition: background 0.3s, border-color 0.3s;
   border-bottom: 1px solid transparent;
 }
 
-.scrolled {
+/* Smooth background reveal on scroll via ::before */
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--background-opaque);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background: var(--background-opaque);
-  border-bottom-color: var(--text-transparent);
+  border-bottom: 1px solid var(--text-transparent);
+  opacity: 0;
+  transition: opacity 0.6s;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.scrolled::before {
+  opacity: 1;
 }
 
 .headerInner {
@@ -54,6 +65,11 @@
 }
 
 .logo:hover .logoText {
+  opacity: 1;
+}
+
+/* Show logo text when header is scrolled */
+.scrolled .logoText {
   opacity: 1;
 }
 
@@ -235,7 +251,7 @@
   color: var(--primary);
 }
 
-/* CTA Button: OUTLINED style matching real site */
+/* CTA Button: OUTLINED with circular fill effect */
 .ctaBtn {
   display: inline-flex;
   align-items: center;
@@ -250,14 +266,36 @@
   color: var(--text);
   background: none;
   text-decoration: none;
-  transition: all 0.5s;
+  transition: color 0.5s, border-color 0.5s;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.ctaBtn::before {
+  content: '';
+  box-sizing: border-box;
+  pointer-events: none;
+  background: linear-gradient(190.05deg, #98e8fc -16.32%, #1fa9ff 56.32%, #8980f6 115.25%);
+  border-radius: 50%;
+  width: 220%;
+  padding-top: 220%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s;
+  z-index: -1;
+}
+
+.ctaBtn:hover::before {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .ctaBtn:hover {
-  background: var(--primary);
-  border-color: var(--primary);
   color: #fff;
+  border-color: transparent;
 }
 
 /* Hamburger */
@@ -345,14 +383,36 @@
   color: var(--text);
   background: none;
   text-decoration: none;
-  transition: all 0.5s;
+  transition: color 0.5s, border-color 0.5s;
   width: fit-content;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.mobileCtaBtn::before {
+  content: '';
+  box-sizing: border-box;
+  pointer-events: none;
+  background: linear-gradient(190.05deg, #98e8fc -16.32%, #1fa9ff 56.32%, #8980f6 115.25%);
+  border-radius: 50%;
+  width: 220%;
+  padding-top: 220%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s;
+  z-index: -1;
+}
+
+.mobileCtaBtn:hover::before {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .mobileCtaBtn:hover {
-  background: var(--primary);
-  border-color: var(--primary);
   color: #fff;
+  border-color: transparent;
 }
 
 @media (max-width: 1023px) {

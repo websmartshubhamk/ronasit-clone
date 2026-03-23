@@ -88,6 +88,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 120px;
 }
 
 body {
@@ -156,7 +157,9 @@ h1, h2, h3, h4, h5, h6 {
 .col_75 { width: 75%; }
 .col_100 { width: 100%; }
 
-/* Button - OUTLINED/GHOST by default (real site style) */
+/* ==========================================
+   BUTTON - Circular Fill Effect (signature)
+   ========================================== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -169,19 +172,51 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1rem;
   line-height: 30px;
   cursor: pointer;
-  transition: all 0.5s;
+  transition: color 0.5s, border-color 0.5s;
   border: 1px solid var(--text-transparent);
   color: var(--text);
   background: none;
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  z-index: 0;
+}
+
+/* Circular gradient blob that expands from center */
+.btn::before {
+  content: '';
+  box-sizing: border-box;
+  pointer-events: none;
+  background: linear-gradient(190.05deg, #98e8fc -16.32%, #1fa9ff 56.32%, #8980f6 115.25%);
+  border-radius: 50%;
+  width: 220%;
+  padding-top: 220%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .btn:hover {
-  background: var(--primary);
-  border-color: var(--primary);
   color: #fff;
+  border-color: transparent;
+}
+
+/* Button bounce on hover */
+@keyframes btnScale {
+  0% { transform: scale(1); }
+  15% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.btn:hover {
+  animation: 0.5s linear btnScale;
 }
 
 /* Filled variant - for special cases only */
@@ -196,13 +231,47 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
-/* Fade on scroll - real site uses translateY(100px) */
+/* ==========================================
+   FADE ON SCROLL - with stagger delays
+   ========================================== */
 .fadeIn {
   opacity: 0;
   transform: translateY(100px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 1s ease-out, transform 1s ease-out;
 }
 .fadeIn.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered child delays */
+.fadeIn:nth-child(1) { transition-delay: 0s; }
+.fadeIn:nth-child(2) { transition-delay: 0.3s; }
+.fadeIn:nth-child(3) { transition-delay: 0.6s; }
+.fadeIn:nth-child(4) { transition-delay: 0.9s; }
+.fadeIn:nth-child(5) { transition-delay: 1.2s; }
+.fadeIn:nth-child(6) { transition-delay: 1.5s; }
+.fadeIn:nth-child(7) { transition-delay: 1.8s; }
+
+/* Directional fade variants */
+.fadeInUp {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.fadeInLeft {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.fadeInRight {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.fadeInUp.visible,
+.fadeInLeft.visible,
+.fadeInRight.visible {
   opacity: 1;
   transform: none;
 }
@@ -236,21 +305,4 @@ main {
 @keyframes pageIn {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-/* Magnetic / alive button effect */
-.btn,
-.ctaBtn {
-  transition: all 0.5s, transform 0.25s ease;
-}
-
-.btn:hover,
-.ctaBtn:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 20px rgba(38, 160, 248, 0.15);
-}
-
-.btn:active,
-.ctaBtn:active {
-  transform: scale(0.98);
 }
